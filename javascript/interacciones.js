@@ -205,11 +205,6 @@ function puntoEnPoligonoCoords(point, polygons) {
 
 // Inicialización del mapa, lo trabajamos con tanto con openstreedmap como con librerias de leaflet
 function inicializarMapa() {
-    // Límites aproximados de Guatemala
-    const boundsGuatemala = [
-        [13.7, -92.3],  // Esquina sudoeste (límite con México/Océano)
-        [17.8, -88.2]   // Esquina noreste (límite con Belice/Honduras)
-    ];
 
     map = L.map("mapa", {
         center: [15.5, -90.25],
