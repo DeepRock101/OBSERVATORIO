@@ -209,9 +209,6 @@ function inicializarMapa() {
     map = L.map("mapa", {
         center: [15.5, -90.25],
         zoom: 9,
-        // PERMITIR movimiento pero SOLO DENTRO de Guatemala:
-        maxBounds: boundsGuatemala,
-        maxBoundsViscosity: 0.9,  // Fuerza del límite (0.5-1.0)
     });
     
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -978,4 +975,5 @@ function convertirArrayACSV(array) {
     );
 
     return [cabeceras.join(","), ...filas].join("\n");
+
 }
