@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="imagenes/planeta-tierra.png" type="image/x-icon">
+  <title>GeoEscazú en Acción</title>
+  <link rel="stylesheet" href="estilos/style.css" />
+  <link rel="stylesheet" href="estilos/menu.css" />
+</head>
+
+<body>
+  <header>
+  <a href="index.html">
+    <button class="btn1">
+      <img src="imagenes/Screenshot_20251126_144512_PENUP-removebg-preview.png" style="height: 80px; vertical-align: middle; margin-right: 4px;">
+    </button>
+  </a>
+  
+  <!-- Botón menú móvil -->
+  <div class="menu-toggle" id="menuToggle">☰</div>
+
+  <!-- Navegación principal -->
+  <nav id="menu">
+    <ul class="menu">
+      <li id="btn-noticias">
+        <a href="noticias.html">NOTICIAS</a>
+      </li>
+      
+      <li id="btn-mapa">
+        <a href="mapa.html">MAPA DE CONFLICTOS</a>
+      </li>
+
+      <li id="btn-biblioteca" class="dropdown">
+        <a href="#">CENTRO DE DOCUMENTACIÓN ▾</a>
+        <ul class="submenu">
+          <li><a href="#documentos">- Documentos</a></li>
+          <li><a href="#investigaciones">- Investigaciones</a></li>
+          <li><a href="#publicaciones">- Publicaciones</a></li>
+        </ul>
+      </li>
+
+      <li id="btn-contacto">
+        <a href="#contacto">CONTACTANOS</a>
+      </li>
+
+      <li id="btn-acciones">
+        <a href="#Acciones">REGISTRA DE ACCIÓN</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+   
+  <section class="seccion-noticias fade-in">
+    <h2>INICIO</h2>
+    <p><img src="imagenes/Screenshot_20251126_144512_PENUP-removebg-preview.png" alt=""></p>
+
+   
+  </section>
+  
+
+  <footer>
+    <p>© 2025 Escazú en Acción | Plataforma ciudadana por la justicia ambiental</p>
+    <p>Inspirado en el Acuerdo de Escazú y en la participación ambiental latinoamericana.</p>
+  </footer>
+
+
+
+   <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("menu");
+    const dropdowns = document.querySelectorAll(".dropdown");
+
+    menuToggle.addEventListener("click", () => {
+      menu.classList.toggle("active");
+      menuToggle.classList.toggle("active");
+    });
+
+    // Permite abrir submenús tocando en móvil
+    dropdowns.forEach(drop => {
+      drop.addEventListener("click", () => {
+        drop.classList.toggle("active");
+      });
+    });
+  </script>
+</body>
+</html>

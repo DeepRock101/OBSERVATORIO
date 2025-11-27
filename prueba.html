@@ -1,0 +1,179 @@
+<script>    // Función para descargar Excel con información de proyectos
+
+      document
+        .getElementById("descargar")
+        .addEventListener("click", function () {
+          // Crear array con la información de todos los marcadores
+          const datosProyectos = Object.values(marcadores).map((marcador) => {
+            const latlng = marcador.elemento.getLatLng();
+            const popupContent =
+              marcador.elemento.getPopup()?.getContent() || "";
+
+            // Extraer información del popup
+            let nombreProyecto = "Sin nombre";
+            let enlace = "";
+            let descripcion = "";
+
+            // Parsear el contenido del popup para extraer información
+            if (popupContent) {
+              const tempDiv = document.createElement("div");
+              tempDiv.innerHTML = popupContent;
+
+              // Extraer nombre (primer elemento <b>)
+              const nombreElement = tempDiv.querySelector("b");
+              if (nombreElement) {
+                nombreProyecto = nombreElement.textContent;
+              }
+
+              // Extraer enlace
+              const enlaceElement = tempDiv.querySelector("a");
+              if (enlaceElement) {
+                enlace = enlaceElement.href;
+              }
+
+              // Extraer descripción (texto después del <br>)
+              const brIndex = popupContent.indexOf("<br>");
+              if (brIndex !== -1) {
+                descripcion = popupContent.substring(brIndex + 4);
+                // Limpiar HTML de la descripción
+                descripcion = descripcion.replace(/<[^>]*>/g, "").trim();
+              }
+            }
+
+            return {
+              "Nombre del Proyecto": nombreProyecto,
+              Latitud: latlng.lat.toFixed(6),
+              Longitud: latlng.lng.toFixed(6),
+              Categoría: marcador.categoria,
+              Tipo: marcador.tipo,
+              Enlace: enlace,
+              Descripción: descripcion,
+              Estado:
+                marcador.categoria === "prueba4" ? "Terminado" : "Iniciado",
+            };
+          });
+
+          // Agregar fila de totales
+          const totales = {
+            "Nombre del Proyecto": "TOTAL DE PROYECTOS",
+            Latitud: "",
+            Longitud: "",
+            Categoría: "",
+            Tipo: "",
+            Enlace: "",
+            Descripción: "",
+            Estado: datosProyectos.length.toString(),
+          };
+
+          datosProyectos.push(totales);
+
+          // Convertir a CSV
+          const csvContent = convertirArrayACSV(datosProyectos);
+
+          // Descargar el archivo
+          const blob = new Blob([csvContent], {
+            type: "text/csv;charset=utf-8;",
+          });
+          const link = document.createElement("a");
+          const url = URL.createObjectURL(blob);
+
+          link.setAttribute("href", url);
+          link.setAttribute("download", "proyectos_geoescazu.csv");
+          link.style.visibility = "hidden";
+
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
+
+      // Función para convertir array de objetos a CSV
+      function convertirArrayACSV(array) {
+        if (array.length === 0) return "";
+
+        const cabeceras = Object.keys(array[0]);
+        const filas = array.map((fila) =>
+          cabeceras
+            .map((cabecera) => {
+              const valor = fila[cabecera] || "";
+              // Escapar comillas y agregar comillas si contiene coma o salto de línea
+              return `"${String(valor).replace(/"/g, '""')}"`;
+            })
+            .join(",")
+        );
+
+        return [cabeceras.join(","), ...filas].join("\n");
+      }</script>
+
+        // <!---------------------------- DASHBOARD DE ESTADÍSTICAS ---------------------------->
+<script>
+        function actualizarDashboard() {
+            // Contar proyectos por categoría
+            let conservacion = 0;
+            let mitigacion = 0;
+            let gestion = 0;
+            let adaptacion = 0;
+            
+            // Contar proyectos por estado
+            let proyectosActivos = 0;
+            let proyectosTerminados = 0;
+            let proyectosReplicados = 0;
+            let proyectosTotales = 0;
+
+            Object.values(marcadores).forEach(marcador => {
+                if (map.hasLayer(marcador.elemento)) {
+                    proyectosTotales++;
+                    
+                    // Contar por categoría
+                    switch(marcador.categoria) {
+                        case 'prueba':
+                            conservacion++;
+                            proyectosActivos++;
+                            break;
+                        case 'prueba2':
+                            mitigacion++;
+                            proyectosTerminados++;
+                            break;
+                        case 'prueba3':
+                            gestion++;
+                            proyectosReplicados++;
+                            break;
+                        case 'prueba4':
+                            adaptacion++;
+                            break;
+                    }
+                }
+            });
+
+            // Actualizar los números en el dashboard
+            const tarjetas = document.querySelectorAll('.tarjeta-estadistica .numero');
+            if (tarjetas[0]) tarjetas[0].textContent = proyectosTotales;
+            if (tarjetas[1]) tarjetas[1].textContent = proyectosActivos;
+            if (tarjetas[2]) tarjetas[2].textContent = proyectosTerminados;
+            if (tarjetas[3]) tarjetas[3].textContent = proyectosReplicados;
+
+            // Actualizar distribución por categoría
+            const categorias = document.querySelectorAll('.categoria-cantidad');
+            if (categorias[0]) categorias[0].textContent = conservacion + ' proyectos';
+            if (categorias[1]) categorias[1].textContent = mitigacion + ' proyectos';
+            if (categorias[2]) categorias[2].textContent = gestion + ' proyectos';
+            if (categorias[3]) categorias[3].textContent = adaptacion + ' proyectos';
+        }
+
+        // Botón para mostrar/ocultar dashboard
+        document.getElementById('toggle-dashboard').addEventListener('click', function() {
+            document.getElementById('dashboard').classList.toggle('oculto');
+        });
+
+        // Actualizar dashboard inicial
+        actualizarDashboard();
+    </script>
+
+    <script>
+        document.getElementById("btn-toggle-filtros").addEventListener("click", () => {
+            document.getElementById("filtros").classList.toggle("mostrar");
+        });
+    </script>
+
+
+</script>
+
