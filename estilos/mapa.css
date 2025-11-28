@@ -1,4 +1,4 @@
-/* ESTILOS DEL MAPA Y FILTROS */
+
 .contenedor-vertical {
   display: flex;
   flex-direction: column;
@@ -98,7 +98,7 @@
 }
 
 .checkbox-item:hover {
-  background-color: rgba(58, 90, 64, 0.08); /* Verde Musgo Profundo con transparencia */
+  background-color: rgba(58, 90, 64, 0.08); 
 }
 
 .checkbox-item input {
@@ -197,7 +197,8 @@
 .leyenda-color5 { background: #DC143C; }
 .leyenda-color6 { background: #B22222; }
 
-/* SECCIONES */
+
+
 section {
   padding: 4rem 2rem;
   max-width: 1200px;
@@ -221,7 +222,9 @@ section h2 {
   color: var(--gris-pizarra);
 }
 
-/* RESPONSIVE */
+
+
+
 @media (max-width: 768px) {
   .contenedor-vertical {
     padding: 0 15px;

@@ -9,7 +9,7 @@ let popup = L.popup();
 const textosPersonalizados = {
   Guatemala: {
     "Alta Verapaz": "Esto unicamente es un prueba jajaj.",
-    Huehuetenango: "Esto unicamente es un prueba jaja",
+    "Huehuetenango": "Esto unicamente es un prueba jaja",
   },
 
   "Municipios Guatemala": {
@@ -18,10 +18,6 @@ const textosPersonalizados = {
     "Santa Catarina Pinula": "pruebas",
   },
 
-  "El Salvador": {
-    "San Salvador": "Texto para San Salvador, El Salvador...",
-    "La Libertad": "Texto para La Libertad, El Salvador...",
-  },
 };
 
 // Configurar menú hamburguesa con soporte para dropdowns
@@ -205,10 +201,17 @@ function puntoEnPoligonoCoords(point, polygons) {
 
 // Inicialización del mapa, lo trabajamos con tanto con openstreedmap como con librerias de leaflet
 function inicializarMapa() {
+    // Límites aproximados de Guatemala
+    const boundsGuatemala = [
+        
+    ];
 
     map = L.map("mapa", {
         center: [15.5, -90.25],
         zoom: 9,
+        // PERMITIR movimiento pero SOLO DENTRO de Guatemala:
+        maxBounds: boundsGuatemala,
+        maxBoundsViscosity: 0.9,  // Fuerza del límite (0.5-1.0)
     });
     
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -778,8 +781,8 @@ function cargarCapasGeoJSON() {
   });
 
   // Segunda capa base
-  var osmHOT = L.tileLayer(
-    "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+  var osmTOPO = L.tileLayer(
+    "https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
     {
       maxZoom: 19,
       attribution:
@@ -819,12 +822,12 @@ function cargarCapasGeoJSON() {
 
   // Definir capas para el control
   var baseLayers = {
-    "OpenStreetMap Estándar": osm,
-    "Mapa HOT": osmHOT,
+    "Mapa Estandar": osm,
+    "Mapa Topografico": osmTOPO,
   };
 
   var overlayLayers = {
-    "Todos los Países": capaGeneralTodos,
+    "Todos": capaGeneralTodos,
     "Departamentos": mapagt,
     "Municipios": mapagtm,
     "Áreas Protegidas": mapasv, // Aparece en el control pero funciona independientemente
@@ -839,7 +842,7 @@ function cargarCapasGeoJSON() {
 
   // Añadir las capas iniciales al mapa
   osm.addTo(map);
-  capaGeneralTodos.addTo(map);
+  mapagt.addTo(map);
   // Las áreas protegidas NO se cargan por defecto, el usuario las activa desde el control
 }
 
@@ -975,5 +978,4 @@ function convertirArrayACSV(array) {
     );
 
     return [cabeceras.join(","), ...filas].join("\n");
-
 }

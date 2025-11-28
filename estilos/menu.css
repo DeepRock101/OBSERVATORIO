@@ -1,6 +1,4 @@
-/* =============================
-   TOGGLE MENÚ MÓVIL
-============================= */
+
 .menu-toggle {
   display: none;
   font-size: 2rem;
@@ -9,27 +7,25 @@
   color: var(--blanco);
 }
 
-/* =============================
-   MODO MÓVIL
-============================= */
+
 @media (max-width: 768px) {
   header {
     flex-wrap: wrap;
     justify-content: space-between;
   }
 
-  /* Mostrar el toggle solo en móvil */
+
   .menu-toggle {
     display: block;
   }
 
-  /* Ocultar el menú por defecto */
+
   nav {
     display: none;
     width: 100%;
   }
 
-  /* Cuando el toggle está activo, mostrar el menú */
+
   nav.active {
     display: block;
     background-color: var(--verde-musgo-profundo);
@@ -58,7 +54,7 @@
     display: block;
   }
   
-  /* Mantener el menú abierto cuando está activo */
+
   nav:not(.active) {
     display: none;
   }

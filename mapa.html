@@ -1,142 +1,162 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="imagenes/planeta-tierra.png" type="image/x-icon">
-  <title>GeoEscazú en Acción</title>
-  <link rel="stylesheet" href="estilos/style.css" />
-  <link rel="stylesheet" href="estilos/mapa.css" />
-  <link rel="stylesheet" href="estilos/menu.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="imagenes/planeta-tierra.png" type="image/x-icon" />
+    <title>GeoEscazú en Acción</title>
+    <link rel="stylesheet" href="estilos/style.css" />
+    <link rel="stylesheet" href="estilos/mapa.css" />
+    <link rel="stylesheet" href="estilos/menu.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
 
-<body>
- <header>
-  <a href="index.html">
-    <button class="btn1">
-      <img src="imagenes/Screenshot_20251126_144512_PENUP-removebg-preview.png" style="height: 80px; vertical-align: middle; margin-right: 4px;">
-    </button>
-  </a>
-  
-  <!-- Botón menú móvil -->
-  <div class="menu-toggle" id="menuToggle">☰</div>
+  <body>
+    <header>
+      <a href="index.html">
+        <button class="btn1">
+          <img
+            src="imagenes/Screenshot_20251126_144512_PENUP-removebg-preview.png"
+            style="height: 80px; vertical-align: middle; margin-right: 4px"
+          />
+        </button>
+      </a>
 
-  <!-- Navegación principal -->
-  <nav id="menu">
-    <ul class="menu">
-      <li id="btn-noticias">
-        <a href="noticias.html">NOTICIAS</a>
-      </li>
-      
-      <li id="btn-mapa">
-        <a href="mapa.html">MAPA DE CONFLICTOS</a>
-      </li>
+      <div class="menu-toggle" id="menuToggle">☰</div>
 
-      <li id="btn-biblioteca" class="dropdown">
-        <a href="#">CENTRO DE DOCUMENTACIÓN ▾</a>
-        <ul class="submenu">
-          <li><a href="#documentos">- Documentos</a></li>
-          <li><a href="#investigaciones">- Investigaciones</a></li>
-          <li><a href="#publicaciones">- Publicaciones</a></li>
+      <nav id="menu">
+        <ul class="menu">
+          <li id="btn-noticias">
+            <a href="noticias.html">NOTICIAS</a>
+          </li>
+
+          <li id="btn-mapa">
+            <a href="mapa.html">MAPA DE CONFLICTOS</a>
+          </li>
+
+          <li id="btn-biblioteca" class="dropdown">
+            <a href="#">CENTRO DE DOCUMENTACIÓN ▾</a>
+            <ul class="submenu">
+              <li><a href="#documentos">- Documentos</a></li>
+              <li><a href="#investigaciones">- Investigaciones</a></li>
+              <li><a href="#publicaciones">- Publicaciones</a></li>
+            </ul>
+          </li>
+
+          <li id="btn-contacto">
+            <a href="#contacto">CONTACTANOS</a>
+          </li>
+
+          <li id="btn-acciones">
+            <a href="#Acciones">REGISTRA DE ACCIÓN</a>
+          </li>
         </ul>
-      </li>
+      </nav>
+    </header>
 
-      <li id="btn-contacto">
-        <a href="#contacto">CONTACTANOS</a>
-      </li>
-
-      <li id="btn-acciones">
-        <a href="#Acciones">REGISTRA DE ACCIÓN</a>
-      </li>
-    </ul>
-  </nav>
-</header>
-
-     <section class="seccion-noticias fade-in">
-        <h1>"¡Bienvenido al Observatorio GeoEscazú!</h1>
-        <p> Este mapa interactivo es el núcleo de nuestra plataforma 
-          y opera como la implementación ciudadana del Acuerdo de Escazú en Guatemala, en colaboración con 
-          el Movimiento Ecológico Estudiantil (MEE). Aquí centralizamos, ordenamos y georreferenciamos casos 
-          de conflictividad socioambiental en todo el país, transformando datos fragmentados en información 
-          confiable y accesible para comunidades y defensores. Utiliza los filtros para explorar las situaciones 
-          (minería, tierra, agua, etc.) y las fichas estandarizadas para ejercer tu derecho al acceso a la 
-          información y la participación pública. Tu consulta fortalece la democracia ambiental y visibiliza 
-          la realidad territorial."        
-        </p>
+    <section class="seccion-noticias fade-in">
+      <h1>"¡Bienvenido al Observatorio GeoEscazú!</h1>
+      <p>
+        Este mapa interactivo es el núcleo de nuestra plataforma y opera como la
+        implementación ciudadana del Acuerdo de Escazú en Guatemala, en
+        colaboración con el Movimiento Ecológico Estudiantil (MEE). Aquí
+        centralizamos, ordenamos y georreferenciamos casos de conflictividad
+        socioambiental en todo el país, transformando datos fragmentados en
+        información confiable y accesible para comunidades y defensores. Utiliza
+        los filtros para explorar las situaciones (minería, tierra, agua, etc.)
+        y las fichas estandarizadas para ejercer tu derecho al acceso a la
+        información y la participación pública. Tu consulta fortalece la
+        democracia ambiental y visibiliza la realidad territorial."
+      </p>
     </section>
 
-  <!---------------------------- ESTRUCTURA VERTICAL: MAPA ARRIBA, FILTROS ABAJO ---------------------------->
-  <div class="contenedor-vertical">
-    
-    <!---------------------------- MAPA ARRIBA ---------------------------->
-    <div class="mapa-superior">
-      <div id="mapa"></div>
-    </div>
+    <div class="contenedor-vertical">
+      <div class="mapa-superior">
+        <div id="mapa"></div>
+      </div>
 
-    <!---------------------------- FILTROS ABAJO ---------------------------->
-    <div id="filtros" class="filtros-inferiores">
-      <h2>Filtros</h2>
-      <div class="filtro-grupo">
-      
-        <div class="checkbox-item">
-          <input type="checkbox" id="categoria-conservacion" checked />
-          <label for="categoria-conservacion">Recursos Forestales y Bosques</label>
+      <div id="filtros" class="filtros-inferiores">
+        <h2>Filtros</h2>
+        <div class="filtro-grupo">
+          <div class="checkbox-item">
+            <input type="checkbox" id="categoria-conservacion" checked />
+            <label for="categoria-conservacion"
+              >Recursos Forestales y Bosques</label
+            >
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="categoria-mitigacion" checked />
+            <label for="categoria-mitigacion">Minería y Extracción</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="categoria-gestion" checked />
+            <label for="categoria-gestion"
+              >Gestión del Agua y Contaminación</label
+            >
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="categoria-adaptacion" checked />
+            <label for="categoria-adaptacion">Contaminación y Desechos</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="categoria-educacion" checked />
+            <label for="categoria-educacion">Tierra y Monocultivos</label>
+          </div>
         </div>
-        <div class="checkbox-item">
-          <input type="checkbox" id="categoria-mitigacion" checked />
-          <label for="categoria-mitigacion">Minería y Extracción</label>
-        </div>
-        <div class="checkbox-item">
-          <input type="checkbox" id="categoria-gestion" checked />
-          <label for="categoria-gestion">Gestión del Agua y Contaminación</label>
-        </div>
-        <div class="checkbox-item">
-          <input type="checkbox" id="categoria-adaptacion" checked />
-          <label for="categoria-adaptacion">Contaminación y Desechos</label>
-        </div>
-        <div class="checkbox-item">
-          <input type="checkbox" id="categoria-educacion" checked />
-          <label for="categoria-educacion">Tierra y Monocultivos</label>
+        <button class="btn-reset" id="btn-reset">Mostrar Todos</button>
+        <button class="btn-reset" id="btn-quitar-todos">Quitar Todos</button>
+        <button class="btn-reset" id="btn-descargar-excel">Descargar</button>
+        <div class="leyenda">
+          <h3>NIVEL DE PROYECTOS</h3>
+          <div class="leyenda-item">
+            <div class="leyenda-color1"></div>
+            <span>Bajo</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="leyenda-color2"></div>
+            <span>Medio</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="leyenda-color3"></div>
+            <span>Medio-alto</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="leyenda-color4"></div>
+            <span>Alto</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="leyenda-color5"></div>
+            <span>Muy alto</span>
+          </div>
+          <div class="leyenda-item">
+            <div class="leyenda-color6"></div>
+            <span>Extremo</span>
+          </div>
         </div>
       </div>
-      <button class="btn-reset" id="btn-reset">Mostrar Todos</button>
-      <button class="btn-reset" id="btn-quitar-todos">Quitar Todos</button>
-        <button class="btn-reset" id="btn-descargar-excel"> Descargar</button>
-      <div class="leyenda">
-        <h3>NIVEL DE PROYECTOS</h3>
-        <div class="leyenda-item">
-          <div class="leyenda-color1"></div><span>Bajo</span>
-        </div>
-        <div class="leyenda-item">
-          <div class="leyenda-color2"></div><span>Medio</span>
-        </div>
-        <div class="leyenda-item">
-          <div class="leyenda-color3"></div><span>Medio-alto</span>
-        </div>
-        <div class="leyenda-item">
-          <div class="leyenda-color4"></div><span>Alto</span>
-        </div>
-        <div class="leyenda-item">
-          <div class="leyenda-color5"></div><span>Muy alto</span>
-        </div>
-        <div class="leyenda-item">
-          <div class="leyenda-color6"></div><span>Extremo</span>
-        </div>  
-      </div>
     </div>
 
-  </div>
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="javascript/interacciones.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="javascript/interacciones.js"></script>
-  <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
-
-  <footer>
-    <p>© 2025 Escazú en Acción | Plataforma ciudadana por la justicia ambiental</p>
-    <p>Inspirado en el Acuerdo de Escazú y en la participación ambiental latinoamericana.</p>
-  </footer>
-</body>
+    <footer>
+      <p>
+        © 2025 Escazú en Acción | Plataforma ciudadana por la justicia ambiental
+      </p>
+      <p>
+        Inspirado en el Acuerdo de Escazú y en la participación ambiental
+        latinoamericana.
+      </p>
+    </footer>
+  </body>
 </html>
